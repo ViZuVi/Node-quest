@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/css/style.css")
+    title #{docTitle}
+  body
+    div.page-content
+      header.main-header 
+        nav.main-header__menu-nav
+          ul.main-header__menu-list 
+            li.main-header__menu-item
+              a.main-header__menu-link(href="/quests") Select quest
+            li.main-header__menu-item
+              a.main-header__menu-link(href="/shedule") Shedule
+            li.main-header__menu-item.main-header__menu-item--info
+              a.main-header__menu-link Info
+              ul.main-header-sub-menu-list 
+                li.main-header-sub-menu-item 
+                  a.main-header-sub-menu-link(href="/about") About us
+                li.main-header-sub-menu-item 
+                  a.main-header-sub-menu-link(href="/rules") Rules
+                li.main-header-sub-menu-item 
+                  a.main-header-sub-menu-link(href="/contacts") Contacts
+        nav.main-header__user-nav 
+          ul.main-header__menu-list 
+            li.main-header__menu-item
+              a.main-header__menu-link(href="/login") Login
+      block content
+
+      footer.main-footer
+        p This is footer 
+

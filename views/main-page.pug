@@ -1,0 +1,51 @@
+extends layouts/main-layout.pug
+
+block content
+  main.page-main
+    h1.page-content__title Select your quest
+    //- TODO: add filters
+    ul.quest-list
+      li.quest-list__item
+        img.quest-list__img(src="https://www.gamingscan.com/wp-content/uploads/2020/09/best-games-like-dead-space.jpg", alt="")
+        h3.quest-list__title Starship
+        div.quest-list__wrapper
+          span.quest-list__category Fantastics
+          div.quest-list__complexity
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star
+              img(src="/img/star.svg", alt="")
+            span.quest-list__complexity-star
+              img(src="/img/star.svg", alt="")
+          div.quest-list__gamers
+            span gamers: 
+            span.quest-list__gamers-min 2
+            span  - 
+            span.quest-list__gamers-max 4
+          button.quest-list__favourites-btn +
+      li.quest-list__item
+        img.quest-list__img(src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bojnice-castle-1603142898.jpg?crop=1.00xw:0.752xh;0,0.0240xh&resize=980:*", alt="")
+        h3.quest-list__title Castle
+        div.quest-list__wrapper
+          span.quest-list__category Fantasy
+          div.quest-list__complexity
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star.quest-list__complexity-star--filled
+              img(src="/img/star-filled.svg", alt="")
+            span.quest-list__complexity-star
+              img(src="/img/star.svg", alt="")
+            span.quest-list__complexity-star
+              img(src="/img/star.svg", alt="")
+          div.quest-list__gamers
+            span gamers: 
+            span.quest-list__gamers-min 2
+            span  - 
+            span.quest-list__gamers-max 4
+          button.quest-list__favourites-btn +
