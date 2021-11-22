@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Starship",
+    "genre": "Fantastics",
+    "complexity": 4,
+    "gamers": {"min": 2, "max": 4}
+  }
+]
