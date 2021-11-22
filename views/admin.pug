@@ -1,0 +1,32 @@
+extends ./layouts/main-layout.pug
+
+block content 
+  main.page-main.page-main--admin
+    h1.page-content__title Add new quest
+    form.add-quest-form(action="/admin/add-quest", method="POST")
+      div.add-quest-form__input-wrapper
+        label.add-quest-form__label Quest title 
+        input.add-quest-form__input(type="text" name="quest-title")
+      div.add-quest-form__input-wrapper
+        label.add-quest-form__label Genre
+        input.add-quest-form__input(type="text" name="quest-genre")
+      div.add-quest-form__input-wrapper
+        label.add-quest-form__label Complexiy
+        select.add-quest-form__input(name="quest-complexity") 
+          option(value="1") 1 
+          option(value="2") 2 
+          option(value="3") 3 
+          option(value="4") 4 
+          option(value="5") 5
+      div.add-quest-form__input-wrapper.add-quest-form__input-wrapper--gamers
+        div.add-quest-form__gamers-count-wrapper
+          label.add-quest-form__label Gamers count min
+          input.add-quest-form__input(type="number" name="quest-gamers-min")
+        div.add-quest-form__gamers-count-wrapper
+          label.add-quest-form__label Gamers count max
+          input.add-quest-form__input(type="number" name="quest-gamers-max")
+      div.add-quest-form__input-wrapper
+        label.add-quest-form__label Image link
+        input.add-quest-form__input(type="text" name="quest-img-link")
+      button.add-quest-form__submit-btn(type="submit") Add
+      

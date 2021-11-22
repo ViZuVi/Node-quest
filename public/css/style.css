@@ -87,6 +87,11 @@ body {
   flex-grow: 1;
 }
 
+.page-main--admin {
+  margin: 0 auto;
+  min-width: 600px;
+}
+
 .main-footer {
   border-top: 2px solid rgb(221, 255, 142);
   padding: 20px 24px 20px 24px;
@@ -155,5 +160,55 @@ body {
 
 .quest-list__favourites-btn:hover {
   background-color: #ffffff;
+  color: #000000;
+}
+
+.add-quest-form {
+  margin-bottom: 40px;
+}
+
+.add-quest-form__input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.add-quest-form__input-wrapper--gamers {
+  flex-direction: row;
+}
+
+.add-quest-form__gamers-count-wrapper:first-child {
+  margin-right: 8px;
+}
+
+.add-quest-form__gamers-count-wrapper:last-child {
+  margin-left: 8px;
+}
+
+.add-quest-form__gamers-count-wrapper .add-quest-form__label {
+  margin-right: 8px;
+}
+
+.add-quest-form__label {
+  margin-bottom: 8px;
+}
+
+.add-quest-form__input {
+  min-height: 24px;
+  border: 0;
+}
+
+.add-quest-form__submit-btn {
+  background-color: transparent;
+  border: 2px solid rgb(221, 255, 142);
+  padding: 8px 16px;
+  color: #ffffff;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.add-quest-form__submit-btn:hover {
+  background-color: rgb(221, 255, 142);
   color: #000000;
 }
