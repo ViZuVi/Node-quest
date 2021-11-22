@@ -1,11 +1,15 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const router = express.Router();
 
+const rootDir = require('../util/path')
+
+// admin/add-quest
 router.get('/add-quest', (req, res, next) => {
-  res.render(path.join(__dirname, '..', 'views', 'admin'))
-}) // admin/add-quest
+  res.render(path.join(rootDir, 'views', 'admin'))
+})
 
 router.post('/add-quest', (req, res, next) => {
   res.redirect('/');
