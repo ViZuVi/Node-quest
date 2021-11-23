@@ -1,8 +1,16 @@
 [
   {
+    "previewImg": "https://www.gamingscan.com/wp-content/uploads/2020/09/best-games-like-dead-space.jpg",
     "title": "Starship",
     "genre": "Fantastics",
-    "complexity": 4,
+    "complexity": [1,1,1,0,0],
     "gamers": {"min": 2, "max": 4}
+  },
+  {
+    "previewImg": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bojnice-castle-1603142898.jpg?crop=1.00xw:0.752xh;0,0.0240xh&resize=980:*",
+    "title": "Castle",
+    "genre": "Fantasy",
+    "complexity": [1,1,1,1,0],
+    "gamers": {"min": 2, "max": 6}
   }
 ]
