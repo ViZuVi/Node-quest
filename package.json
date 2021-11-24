@@ -15,5 +15,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "pug": "^3.0.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["data/quests.json"]
   }
 }
