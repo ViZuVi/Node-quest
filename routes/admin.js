@@ -1,18 +1,11 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 
 const router = express.Router();
 
-const rootDir = require('../util/path')
+const adminController = require('../controllers/adminController');
 
-// admin/add-quest
-router.get('/add-quest', (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'admin'), { docTitle: 'Add quest' })
-})
+router.get('/add-quest', adminController.getAddQuestPage); // admin/add-quest
 
-router.post('/add-quest', (req, res, next) => {
-  res.redirect('/');
-})
+router.post('/add-quest', adminController.postAddQuest);
 
 module.exports = router;

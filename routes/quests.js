@@ -1,21 +1,13 @@
 const express = require('express');
-const path = require('path');
 
 const router = express.Router();
 
-const rootDir = require('../util/path')
-const quests = require('../data.json')
+const questsController = require('../controllers/questsController');
 
-router.get('/', (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'main-page'), { docTitle: 'Quests', quests })
-});
+router.get('/', questsController.getMainPage);
 
-router.get('/quests', (req, res, next) => {
-  res.redirect('/')
-});
+router.get('/quests', questsController.getQuestsPage);
 
-router.get('/shcedule', (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'shcedule'), { docTitle: 'Shcedule' })
-});
+router.get('/shcedule', questsController.getShcedulePage);
 
 module.exports = router;
