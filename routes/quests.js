@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const questsController = require('../controllers/questsController');
+const questsController = require('../controllers/quests');
 
 router.get('/', questsController.getMainPage);
 

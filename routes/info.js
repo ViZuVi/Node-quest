@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const siteInfoController = require('../controllers/siteInfoController')
+const siteInfoController = require('../controllers/siteInfo')
 
 router.get('/about', siteInfoController.getAboutPage);
 
