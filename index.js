@@ -6,6 +6,8 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 const questRoutes = require('./routes/quests');
 const infoRoutes = require('./routes/info');
+const buyRoutes = require('./routes/buy');
+const userRoutes = require('./routes/user');
 
 const errorsController = require('./controllers/errors');
 
@@ -18,6 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/admin', adminRoutes);
 app.use(questRoutes);
 app.use(infoRoutes);
+app.use(buyRoutes);
+app.use(userRoutes);
 app.use(errorsController.notFoundPage);
 
 app.listen(3000);

@@ -8,6 +8,4 @@ router.get('/', questsController.getMainPage);
 
 router.get('/quests', questsController.getQuestsPage);
 
-router.get('/shcedule', questsController.getShcedulePage);
-
 module.exports = router;

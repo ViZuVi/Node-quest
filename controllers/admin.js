@@ -4,7 +4,7 @@ const rootDir = require('../util/path');
 const Quest = require('../models/quest');
 
 exports.getAddQuestPage = (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'admin', 'admin'), { docTitle: 'Add quest' })
+  res.render(path.join(rootDir, 'views', 'admin', 'add-quest'), { docTitle: 'Add quest', path: "/admin/add-quest" })
 };
 
 exports.postAddQuest = (req, res, next) => {

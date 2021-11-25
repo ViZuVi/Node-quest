@@ -57,6 +57,7 @@ a {
   padding: 16px 24px;
 }
 
+.main-header__menu-link.isActive,
 .main-header__menu-link:hover {
   color: rgb(221, 255, 142);
 }
@@ -83,7 +84,8 @@ a {
   display: inline-block;
 }
 
-.main-header-sub-menu-link:hover {
+.main-header-sub-menu-link:hover,
+.main-header-sub-menu-link.isActive {
   color: rgb(221, 255, 142);
 }
 
