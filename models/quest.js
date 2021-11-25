@@ -13,7 +13,7 @@ const getQuestFromFile = (cb) => {
       cb(JSON.parse(fileContent));
     }
   })
-}
+};
 
 module.exports = class Quest {
   constructor(quest) {
@@ -29,7 +29,9 @@ module.exports = class Quest {
     getQuestFromFile((savedQuests) => {
       quests = [...savedQuests, this];
       fs.writeFile(questPath, JSON.stringify(quests), err => {
-        console.error('Error: ', err);
+        if (err) {
+          console.error('Error: ', err);
+        }
       })
     })
   }
