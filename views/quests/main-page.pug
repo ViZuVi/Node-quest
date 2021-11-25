@@ -9,15 +9,20 @@ block content
         li.quest-list__item
           img.quest-list__img(src=quest.previewImg, alt="")
           h3.quest-list__title #{quest.title}
-          div.quest-list__wrapper
-            span.quest-list__category #{quest.genre}
-            div.quest-list__complexity
-              each star, index in quest.complexity
-                span.quest-list__complexity-star.quest-list__complexity-star--filled
-                  img(src=star ? "/img/star-filled.svg" : "/img/star.svg", alt="")
-            div.quest-list__gamers
-              span gamers: 
-              span.quest-list__gamers-min #{quest.gamers.min}
-              span  - 
-              span.quest-list__gamers-max #{quest.gamers.max}
-            button.quest-list__favourites-btn +
+          if role === "user"
+            div.quest-list__wrapper
+              span.quest-list__category #{quest.genre}
+              div.quest-list__complexity
+                each star, index in quest.complexity
+                  span.quest-list__complexity-star.quest-list__complexity-star--filled
+                    img(src=star ? "/img/star-filled.svg" : "/img/star.svg", alt="")
+              div.quest-list__gamers
+                span gamers: 
+                span.quest-list__gamers-min #{quest.gamers.min}
+                span  - 
+                span.quest-list__gamers-max #{quest.gamers.max}
+              button.quest-list__btn +
+          else if role === "admin"
+            div.quest-list__wrapper
+              a(href="admin/edit/{id}").quest-list__btn Edit
+              a(href="admin/delete/{id}").quest-list__btn Delete

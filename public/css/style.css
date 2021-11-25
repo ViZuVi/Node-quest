@@ -36,6 +36,7 @@ a {
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid rgb(221, 255, 142);
+  flex-wrap: wrap;
 }
 
 .main-header__menu-list {
@@ -43,6 +44,7 @@ a {
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
 }
 
 .main-header__menu-item {
@@ -155,7 +157,7 @@ a {
   margin-right: 2px;
 }
 
-.quest-list__favourites-btn {
+.quest-list__btn {
   font-weight: bold;
   font-size: inherit;
   color: inherit;
@@ -165,7 +167,7 @@ a {
   padding: 2px 8px;
 }
 
-.quest-list__favourites-btn:hover {
+.quest-list__btn:hover {
   background-color: #ffffff;
   color: #000000;
 }
