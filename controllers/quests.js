@@ -9,5 +9,12 @@ exports.getMainPage = (req, res, next) => {
 };
 
 exports.getQuestsPage = (req, res, next) => {
-  res.redirect('/')
+  res.redirect('/');
+};
+
+exports.getQuestDetailsPage = (req, res, next) => {
+  const questId = req.params.id;
+  Quest.getDetailsById(+questId, selectedQuest => {
+    res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), { questDetails: selectedQuest });
+  })
 };

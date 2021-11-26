@@ -7,7 +7,8 @@ block content
     ul.quest-list
       each quest in quests
         li.quest-list__item
-          img.quest-list__img(src=quest.previewImg, alt="")
+          a.quest-list__details-link(href="/quests/" + quest.id) 
+            img.quest-list__img(src=quest.previewImg, alt="")
           h3.quest-list__title #{quest.title}
           if role === "user"
             div.quest-list__wrapper

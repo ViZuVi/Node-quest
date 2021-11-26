@@ -134,6 +134,7 @@ a {
 .quest-list__title {
   font-size: 24px;
   margin: 0;
+  margin-bottom: auto;
 }
 
 .quest-list__wrapper {

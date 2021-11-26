@@ -8,4 +8,6 @@ router.get('/', questsController.getMainPage);
 
 router.get('/quests', questsController.getQuestsPage);
 
+router.get('/quests/:id', questsController.getQuestDetailsPage);
+
 module.exports = router;

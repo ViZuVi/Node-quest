@@ -1,4 +1,3 @@
-const e = require('express');
 const fs = require('fs');
 const path = require('path');
 
@@ -22,6 +21,7 @@ module.exports = class Quest {
     this.genre = quest.genre;
     this.complexity = quest.complexity;
     this.gamers = quest.gamers;
+    this.id = Date.now();
   }
 
   save() {
@@ -38,5 +38,12 @@ module.exports = class Quest {
 
   static fetchAll(renderQuest) {
     getQuestFromFile(renderQuest);
+  }
+
+  static getDetailsById(id, cb) {
+    getQuestFromFile(quests => {
+      const quest = quests.find(quest => quest.id === id)
+      cb(quest);
+    })
   }
 };
