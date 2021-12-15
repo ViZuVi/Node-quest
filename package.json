@@ -15,7 +15,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "sequelize": "^6.12.0-beta.3"
   },
   "nodemonConfig": {
     "ignore": [
