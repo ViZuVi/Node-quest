@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
+const db = require('../util/database');
 const rootDir = require('../util/path');
+
 const questPath = path.join(rootDir, 'data', 'quests.json');
 
 const getQuestFromFile = (cb) => {
@@ -25,25 +27,16 @@ module.exports = class Quest {
   }
 
   save() {
-    let quests = [];
-    getQuestFromFile((savedQuests) => {
-      quests = [...savedQuests, this];
-      fs.writeFile(questPath, JSON.stringify(quests), err => {
-        if (err) {
-          console.error('Error: ', err);
-        }
-      })
-    })
+    return db.execute('INSERT INTO quests (title, previewImg, genre, complexity, gamers) VALUES (?, ?, ?, ?, ?)',
+      [this.title, this.previewImg, this.genre, this.complexity, this.gamers]
+    );
   }
 
-  static fetchAll(renderQuest) {
-    getQuestFromFile(renderQuest);
+  static fetchAll() {
+    return db.execute('SELECT * FROM quests');
   }
 
-  static getDetailsById(id, cb) {
-    getQuestFromFile(quests => {
-      const quest = quests.find(quest => quest.id === id)
-      cb(quest);
-    })
+  static getDetailsById(id) {
+    return db.execute('SELECT * FROM quests WHERE quests.id = ?', [id]);
   }
 };

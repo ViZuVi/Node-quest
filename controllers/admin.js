@@ -1,3 +1,5 @@
+// TODO: write tests
+
 const path = require('path');
 const rootDir = require('../util/path');
 
@@ -10,21 +12,21 @@ exports.getAddQuestPage = (req, res, next) => {
 exports.postAddQuest = (req, res, next) => {
   const complexityArr = [];
   // TODO: refactor
-  for (let i = 1; i <= 5; i++) {
-    i <= req.body['quest-complexity'] ? complexityArr.push(1) : complexityArr.push(0);
-  }
+  // for (let i = 1; i <= 5; i++) {
+  //   i <= req.body['quest-complexity'] ? complexityArr.push(1) : complexityArr.push(0);
+  // }
   const quest = new Quest({
     previewImg: req.body['quest-img-link'],
     title: req.body['quest-title'],
     genre: req.body['quest-genre'],
-    complexity: complexityArr,
-    gamers: {
-      min: req.body['quest-gamers-min'],
-      max: req.body['quest-gamers-max']
-    },
+    complexity: req.body['quest-complexity'],
+    // gamers: {
+    //   min: req.body['quest-gamers-min'],
+    //   max: req.body['quest-gamers-max']
+    // },
+    gamers: 2 // TODO: hardcoded; change
   })
-  quest.save();
-  res.redirect('/');
+  quest.save().then(() => res.redirect('/')).catch(err => console.error(err));
 };
 
 // TODO: add edit

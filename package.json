@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mysql2": "^2.3.3",
     "pug": "^3.0.2"
   },
   "nodemonConfig": {
-    "ignore": ["data/quests.json"]
+    "ignore": [
+      "data/quests.json"
+    ]
   }
 }
