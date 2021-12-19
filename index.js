@@ -11,6 +11,8 @@ const userRoutes = require('./routes/user');
 
 const errorsController = require('./controllers/errors');
 
+const sequelize = require('./util/database');
+
 app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -24,4 +26,5 @@ app.use(buyRoutes);
 app.use(userRoutes);
 app.use(errorsController.notFoundPage);
 
-app.listen(3000);
+sequelize.sync().then(() => { app.listen(3000); }).catch(err => console.error(err));
+

@@ -5,17 +5,16 @@ const Quest = require('../models/quest');
 
 exports.getMainPage = (req, res, next) => {
   // role admin or user
-  Quest.fetchAll()
-    .then(([rows, fieldData]) => {
+  Quest.findAll()
+    .then((quests) => {
       res.render(path.join(rootDir, 'views', 'quests', 'main-page'), {
         docTitle: 'Quests',
-        quests: rows,
+        quests: quests,
         path: '/',
         role: "admin"
       })
     })
     .catch(err => console.error(err))
-  // ((quests) => res.render(path.join(rootDir, 'views', 'quests', 'main-page'), { docTitle: 'Quests', quests, path: '/', role: "admin" }));
 };
 
 exports.getQuestsPage = (req, res, next) => {
@@ -24,7 +23,7 @@ exports.getQuestsPage = (req, res, next) => {
 
 exports.getQuestDetailsPage = (req, res, next) => {
   const questId = req.params.id;
-  Quest.getDetailsById(questId)
-    .then(([selectedQuest]) => res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), { questDetails: selectedQuest[0] }))
+  Quest.findByPk(questId)
+    .then(quest => res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), { questDetails: quest }))
     .catch(err => console.error(err));
 };

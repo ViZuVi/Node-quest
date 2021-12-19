@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+const sequelize = require('../util/database');
 
-const sequelize = Sequelize.define('quest', {
+const Quest = sequelize.define('quest', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -19,7 +20,7 @@ const sequelize = Sequelize.define('quest', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  complexity: {
+  complexity: { 
     type: Sequelize.INTEGER,
     allowNull: false,
   },
@@ -29,29 +30,4 @@ const sequelize = Sequelize.define('quest', {
   }
 })
 
-
-
-// module.exports = class Quest {
-//   constructor(quest) {
-//     this.previewImg = quest.previewImg;
-//     this.title = quest.title;
-//     this.genre = quest.genre;
-//     this.complexity = quest.complexity;
-//     this.gamers = quest.gamers;
-//     this.id = Date.now();
-//   }
-
-//   save() {
-//     return db.execute('INSERT INTO quests (title, previewImg, genre, complexity, gamers) VALUES (?, ?, ?, ?, ?)',
-//       [this.title, this.previewImg, this.genre, this.complexity, this.gamers]
-//     );
-//   }
-
-//   static fetchAll() {
-//     return db.execute('SELECT * FROM quests');
-//   }
-
-//   static getDetailsById(id) {
-//     return db.execute('SELECT * FROM quests WHERE quests.id = ?', [id]);
-//   }
-// };
+module.exports = Quest;

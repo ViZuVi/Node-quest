@@ -10,23 +10,22 @@ exports.getAddQuestPage = (req, res, next) => {
 };
 
 exports.postAddQuest = (req, res, next) => {
-  const complexityArr = [];
-  // TODO: refactor
-  // for (let i = 1; i <= 5; i++) {
-  //   i <= req.body['quest-complexity'] ? complexityArr.push(1) : complexityArr.push(0);
-  // }
-  const quest = new Quest({
+  Quest.create({
     previewImg: req.body['quest-img-link'],
     title: req.body['quest-title'],
     genre: req.body['quest-genre'],
     complexity: req.body['quest-complexity'],
+    gamers: 2 // TODO: hardcoded; change
+  }).then(res => console.log('Quest created')).catch(err => console.error(err))
+    
     // gamers: {
     //   min: req.body['quest-gamers-min'],
     //   max: req.body['quest-gamers-max']
     // },
-    gamers: 2 // TODO: hardcoded; change
-  })
-  quest.save().then(() => res.redirect('/')).catch(err => console.error(err));
 };
+
+exports.editQuest = (req, res, next) => {
+  console.log(req)
+}
 
 // TODO: add edit
