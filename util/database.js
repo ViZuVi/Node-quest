@@ -6,3 +6,5 @@ const sequelize = new Sequelize('node-quest', 'root', '123456Q', {
 })
 
 module.exports = sequelize;
+
+// TODO: to env

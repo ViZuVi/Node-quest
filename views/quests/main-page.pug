@@ -25,5 +25,5 @@ block content
               button.quest-list__btn +
           else if role === "admin"
             div.quest-list__wrapper
-              a(href="admin/edit/{id}").quest-list__btn Edit
+              a(href=`admin/edit-quest/${quest.id}?edit=true`).quest-list__btn Edit
               a(href="admin/delete/{id}").quest-list__btn Delete
