@@ -12,4 +12,6 @@ router.post('/add-quest', adminController.postAddQuest);
 
 router.post('/edit-quest', adminController.postEditQuest);
 
+router.post('/delete', adminController.postDeleteQuest);
+
 module.exports = router;

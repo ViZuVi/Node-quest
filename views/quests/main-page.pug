@@ -26,4 +26,6 @@ block content
           else if role === "admin"
             div.quest-list__wrapper
               a(href=`admin/edit-quest/${quest.id}?edit=true`).quest-list__btn Edit
-              a(href="admin/delete/{id}").quest-list__btn Delete
+              form(action="/admin/delete" method="POST") 
+                input(type="hidden" name="id" value=quest.id)
+                button(type="submit").quest-list__btn Delete

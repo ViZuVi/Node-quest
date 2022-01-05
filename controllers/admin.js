@@ -56,3 +56,13 @@ exports.postEditQuest = (req, res, next) => {
     .then(result => res.redirect('/'))
     .catch(err => console.error(err))
 }
+
+exports.postDeleteQuest = (req, res, next) => {
+  console.log(req.body);
+  Quest.findByPk(req.body.id)
+    .then(quest => {
+      return quest.destroy()
+    })
+    .then(() => res.redirect('/'))
+    .catch((err) => console.error(err))
+}
