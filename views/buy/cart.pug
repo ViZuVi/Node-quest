@@ -1,5 +1,17 @@
 extends ../layouts/main-layout.pug
 
 block content
-  main.page-main
-    h1.page-content__title Cart coming soon...
+  main.page-main.cart 
+    h1.page-content__title Your cart 
+    if quests.length 
+      ul.cart-list
+        each quest in quests 
+          li.cart-list__item 
+            a.cart-list__link(href="/quests/" + quest.id) #{quest.title}
+            span #{quest.price} ₽
+      form.cart-total(action="/checkout" method="POST")
+        span Total: 
+        span #{total} ₽
+        button.cart__checkout-btn(type="submit") Checkout
+    else
+      p Nothing in cart yet... 

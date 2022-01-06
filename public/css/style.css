@@ -222,3 +222,51 @@ a {
   background-color: rgb(221, 255, 142);
   color: #000000;
 }
+
+.cart {
+  max-width: 400px;
+}
+
+.cart-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 48px;
+}
+
+.cart-list__item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cart-list__link {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.cart-list__link:hover {
+  opacity: 0.5;
+}
+
+/* TODO: buttons to UI and fix styles */
+
+.cart-total {
+  display: flex;
+}
+
+.cart__checkout-btn {
+  background-color: transparent;
+  border: 2px solid rgb(221, 255, 142);
+  padding: 8px 16px;
+  color: #ffffff;
+  font-size: inherit;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.cart__checkout-btn:hover {
+  background-color: rgb(221, 255, 142);
+  color: #000000;
+}

@@ -10,13 +10,17 @@ exports.getAddQuestPage = (req, res, next) => {
 };
 
 exports.postAddQuest = (req, res, next) => {
-  Quest.create({
+  req.user.createQuest({
     previewImg: req.body['quest-img-link'],
     title: req.body['quest-title'],
     genre: req.body['quest-genre'],
     complexity: req.body['quest-complexity'],
-    gamers: 2 // TODO: hardcoded; change
-  }).then(result => res.redirect('/')).catch(err => console.error(err))
+    gamers: 2, // TODO: hardcoded; change
+    price: req.body['quest-price'],
+    userId: req.user.id,
+  })
+    .then(result => res.redirect('/'))
+    .catch(err => console.error(err))
 
   // gamers: {
   //   min: req.body['quest-gamers-min'],

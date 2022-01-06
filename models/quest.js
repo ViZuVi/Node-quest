@@ -27,6 +27,10 @@ const Quest = sequelize.define('quest', {
   gamers: {
     type: Sequelize.INTEGER,
     allowNull: false,
+  },
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   }
 })
 

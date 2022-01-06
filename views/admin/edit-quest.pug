@@ -31,6 +31,9 @@ block content
       div.add-quest-form__input-wrapper
         label.add-quest-form__label Image link
         input.add-quest-form__input(type="text" name="quest-img-link", value=isEdit ? quest.previewImg : "")
+      div.add-quest-form__input-wrapper
+        label.add-quest-form__label Price 
+        input.add-quest-form__input(type="text" name="quest-price", value=isEdit ? quest.price  : "")
       input(type="hidden", name="id" value=isEdit ? quest.id : "")
       if isEdit
         button.add-quest-form__submit-btn(type="submit") Edit

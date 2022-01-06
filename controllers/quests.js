@@ -11,7 +11,7 @@ exports.getMainPage = (req, res, next) => {
         docTitle: 'Quests',
         quests: quests,
         path: '/',
-        role: "admin"
+        role: "user"
       })
     })
     .catch(err => console.error(err))
