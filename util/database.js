@@ -4,7 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = cb => {
-  MongoClient.connect('mongodb+srv://zu:150518@cluster0.tchws.mongodb.net/nodeQuest?retryWrites=true&w=majority')
+  MongoClient.connect(process.env.DATABASE_NODE_QUEST)
     .then((client) => {
       _db = client.db();
       console.log('Connected!');
