@@ -7,8 +7,12 @@ block content
       ul.cart-list
         each quest in quests 
           li.cart-list__item 
-            a.cart-list__link(href="/quests/" + quest.id) #{quest.title}
+            a.cart-list__link(href="/quests/" + quest._id) #{quest.title}
             span #{quest.price} ₽
+            span.cart-list__quantity #{quest.quantity}
+            form(action="/cart-delete-item", method="post")
+              input(type="hidden" name="id" value=quest._id)
+              button.quest-list__btn(type="submit") Delete 
       form.cart-total(action="/checkout" method="POST")
         span Total: 
         span #{total} ₽

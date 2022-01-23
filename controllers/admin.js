@@ -1,5 +1,4 @@
 // TODO: write tests
-
 const path = require('path');
 const rootDir = require('../util/path');
 
@@ -10,15 +9,16 @@ exports.getAddQuestPage = (req, res, next) => {
 };
 
 exports.postAddQuest = (req, res, next) => {
-  req.user.createQuest({
-    previewImg: req.body['quest-img-link'],
-    title: req.body['quest-title'],
-    genre: req.body['quest-genre'],
-    complexity: req.body['quest-complexity'],
-    gamers: 2, // TODO: hardcoded; change
-    price: req.body['quest-price'],
-    userId: req.user.id,
-  })
+  const previewImg = req.body['quest-img-link'];
+  const title = req.body['quest-title'];
+  const genre = req.body['quest-genre'];
+  const complexity = req.body['quest-complexity'];
+  const gamers = 2; // TODO: hardcoded; change
+  const price = req.body['quest-price'];
+
+  const quest = new Quest(previewImg, title, genre, complexity, gamers, price);
+
+  quest.save()
     .then(result => res.redirect('/'))
     .catch(err => console.error(err))
 
@@ -35,7 +35,7 @@ exports.getEditQuestPage = (req, res, next) => {
       path: '/admin/edit-quest',
     })
   }
-  Quest.findByPk(req.params.id)
+  Quest.findQuest(req.params.id)
     .then(quest => {
       res.render(path.join(rootDir, 'views', 'admin', 'edit-quest'), {
         docTitle: 'Edit quest',
@@ -48,25 +48,22 @@ exports.getEditQuestPage = (req, res, next) => {
 }
 
 exports.postEditQuest = (req, res, next) => {
-  Quest.findByPk(req.body.id)
-    .then(quest => {
-      quest.previewImg = req.body['quest-img-link'];
-      quest.title = req.body['quest-title'];
-      quest.genre = req.body['quest-genre'];
-      quest.complexity = req.body['quest-complexity'];
-      quest.gamers = 2;// TODO: hardcoded; change
-      return quest.save();
-    })
-    .then(result => res.redirect('/'))
+  const questId = req.body.id;
+  const updatedPreviewImg = req.body['quest-img-link'];
+  const updatedTitle = req.body['quest-title'];
+  const updatedGenre = req.body['quest-genre'];
+  const updatedComplexity = req.body['quest-complexity'];
+  const updatedGamers = 2;// TODO: hardcoded; change
+  const updatedPrice = req.body['quest-price'];
+
+  const quest = new Quest(updatedPreviewImg, updatedTitle, updatedGenre, updatedComplexity, updatedGamers, updatedPrice, questId)
+  quest.save()
+    .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 }
 
 exports.postDeleteQuest = (req, res, next) => {
-  console.log(req.body);
-  Quest.findByPk(req.body.id)
-    .then(quest => {
-      return quest.destroy()
-    })
+  Quest.deleteQuest(req.body.id)
     .then(() => res.redirect('/'))
     .catch((err) => console.error(err))
 }

@@ -1,0 +1,19 @@
+extends ../layouts/main-layout.pug
+
+block content
+  main.page-main.orders
+    h1.page-content__title Your orders
+    if orders.length 
+      ul.orders-list 
+        each order, i in orders 
+          li.order-item
+            span.order-item__count  #{i+1}
+            div.order-item__wrapper
+              each item in order.items 
+                div.order-item__content-wrapper
+                  span.order-item__title #{item.title}
+                  span.order-item__quantity quantity: #{item.quantity}
+                  span.order-item__date date: #{order.date}
+    else
+      p You have no orders yet
+    

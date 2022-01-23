@@ -1,10 +1,25 @@
-const Sequelize = require('sequelize');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-const sequelize = new Sequelize('node-quest', 'root', '123456Q', {
-  dialect: 'mysql',
-  host: 'localhost',
-})
+let _db;
 
-module.exports = sequelize;
+const mongoConnect = cb => {
+  MongoClient.connect('mongodb+srv://zu:150518@cluster0.tchws.mongodb.net/nodeQuest?retryWrites=true&w=majority')
+    .then((client) => {
+      _db = client.db();
+      console.log('Connected!');
+      cb();
+    })
+    .catch((err) => console.error(err))
+};
 
-// TODO: to env
+const getDb = () => {
+  if (_db) {
+    return _db;
+  }
+  throw 'No database found!';
+};
+
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
+

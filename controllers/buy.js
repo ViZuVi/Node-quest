@@ -1,21 +1,45 @@
 const path = require('path');
-
 const rootDir = require('../util/path');
 
+const Quest = require('../models/quest');
+
 exports.getCartPage = (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'buy', 'cart'), {
-    docTitle: 'Cart',
-    path: '/cart',
-    quests: [{ id: 1, title: "Test", price: 123 }, { id: 2, title: "Test2", price: 323 }],
-    total: 346
-  });
+  req.user
+    .getCart()
+    .then(quests => {
+      res.render(path.join(rootDir, 'views', 'buy', 'cart'), {
+        docTitle: 'Cart',
+        path: '/cart',
+        quests,
+        total: 346
+      });
+    })
 };
 
 exports.getShcedulePage = (req, res, next) => {
   res.render(path.join(rootDir, 'views', 'buy', 'shcedule'), { docTitle: 'Shcedule', path: '/shcedule' })
 };
 
-exports.getCheckoutPage = (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'buy', 'checkout'), { docTitle: 'Checkout', path: '/checkout' })
+exports.getOrdersPage = (req, res, next) => {
+  req.user.getOrders()
+    .then(orders => {
+      res.render(path.join(rootDir, 'views', 'buy', 'orders'), { docTitle: 'Orders', path: '/orders', orders })
+    })
 };
+
+exports.postAdToCart = (req, res, next) => {
+  Quest.findQuest(req.body.id)
+    .then(quest => req.user.addToCart(quest))
+    .then(() => res.redirect('/cart'))
+}
+
+exports.postDeleteFromCart = (req, res, next) => {
+  req.user.deleteItemFromCart(req.body.id)
+    .then(() => res.redirect('/cart'))
+}
+
+exports.postOrder = (req, res, next) => {
+  req.user.addOrder()
+    .then(() => res.redirect('/orders'))
+}
 

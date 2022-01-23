@@ -11,20 +11,17 @@ const userRoutes = require('./routes/user');
 
 const errorsController = require('./controllers/errors');
 
-const sequelize = require('./util/database');
-
-const Quest = require('./models/quest');
-const User = require('./models/user');
-const Cart = require('./models/cart');
-const CartItem = require('./models/cart-item');
-
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
+const mongoConnect = require('./util/database').mongoConnect;
+
+const User = require('./models/user');
+
 app.use((req, res, next) => {
-  User.findByPk(1)
+  User.findUser('61dbd3fb3e8f6cc599a64106') // TODO: hardcoded for now; fix after auth implementing 
     .then(user => {
-      req.user = user;
+      req.user = new User(user.name, user.email, user.cart, user._id);
       next();
     })
     .catch(err => console.error(err));
@@ -40,25 +37,4 @@ app.use(buyRoutes);
 app.use(userRoutes);
 app.use(errorsController.notFoundPage);
 
-Quest.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
-User.hasMany(Quest);
-User.hasOne(Cart);
-Cart.belongsTo(User); // not nessesary; equals to prev
-Cart.belongsToMany(Quest, { through: CartItem});
-Quest.belongsToMany(Cart, { through: CartItem});
-
-sequelize
-  // .sync({ force: true }) // force needed only once to create relations; don't needed in prod
-  .sync()
-  .then(() => {
-    return User.findByPk(1)
-  })
-  .then((user) => {
-    if (!user) {
-      return User.create({ name: 'John', email: 'test@test.com' });
-    }
-    return user;
-  })
-  .then(() => app.listen(3000))
-  .catch(err => console.error(err));
-
+mongoConnect(() => app.listen(3000))

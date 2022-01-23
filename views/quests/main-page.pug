@@ -7,7 +7,7 @@ block content
     ul.quest-list
       each quest in quests
         li.quest-list__item
-          a.quest-list__details-link(href="/quests/" + quest.id) 
+          a.quest-list__details-link(href="/quests/" + quest._id) 
             img.quest-list__img(src=quest.previewImg, alt="")
           h3.quest-list__title #{quest.title}
           if role === "user"
@@ -22,10 +22,12 @@ block content
                 span.quest-list__gamers-min #{quest.gamers.min}
                 span  - 
                 span.quest-list__gamers-max #{quest.gamers.max}
-              button.quest-list__btn +
+              form(action="/cart", method="post") 
+                input(type="hidden" name="id" value=quest._id)
+                button.quest-list__btn(type="submit") +
           else if role === "admin"
             div.quest-list__wrapper
-              a(href=`admin/edit-quest/${quest.id}?edit=true`).quest-list__btn Edit
+              a(href=`admin/edit-quest/${quest._id}?edit=true`).quest-list__btn Edit
               form(action="/admin/delete" method="POST") 
-                input(type="hidden" name="id" value=quest.id)
+                input(type="hidden" name="id" value=quest._id)
                 button(type="submit").quest-list__btn Delete

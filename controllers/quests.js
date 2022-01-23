@@ -5,7 +5,7 @@ const Quest = require('../models/quest');
 
 exports.getMainPage = (req, res, next) => {
   // role admin or user
-  Quest.findAll()
+  Quest.fetchAll()
     .then((quests) => {
       res.render(path.join(rootDir, 'views', 'quests', 'main-page'), {
         docTitle: 'Quests',
@@ -23,7 +23,7 @@ exports.getQuestsPage = (req, res, next) => {
 
 exports.getQuestDetailsPage = (req, res, next) => {
   const questId = req.params.id;
-  Quest.findByPk(questId)
+  Quest.findQuest(questId)
     .then(quest => res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), { questDetails: quest }))
     .catch(err => console.error(err));
 };
