@@ -9,11 +9,12 @@ block content
           li.order-item
             span.order-item__count  #{i+1}
             div.order-item__wrapper
-              each item in order.items 
+              each item in order.quests 
                 div.order-item__content-wrapper
-                  span.order-item__title #{item.title}
+                  span.order-item__title #{item.quest.title}
                   span.order-item__quantity quantity: #{item.quantity}
                   span.order-item__date date: #{order.date}
+              span.order-item__total total: #{order.total}
     else
       p You have no orders yet
     

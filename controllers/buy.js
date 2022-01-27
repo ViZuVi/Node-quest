@@ -2,16 +2,19 @@ const path = require('path');
 const rootDir = require('../util/path');
 
 const Quest = require('../models/quest');
+const Order = require('../models/order');
 
 exports.getCartPage = (req, res, next) => {
   req.user
-    .getCart()
-    .then(quests => {
+    .populate('cart.items.questId')
+    .then(user => {
+      const quests = user.cart.items;
+      const total = user.cart.total;
       res.render(path.join(rootDir, 'views', 'buy', 'cart'), {
         docTitle: 'Cart',
         path: '/cart',
         quests,
-        total: 346
+        total,
       });
     })
 };
@@ -21,14 +24,14 @@ exports.getShcedulePage = (req, res, next) => {
 };
 
 exports.getOrdersPage = (req, res, next) => {
-  req.user.getOrders()
+  Order.find({ 'user.userId': req.user._id })
     .then(orders => {
       res.render(path.join(rootDir, 'views', 'buy', 'orders'), { docTitle: 'Orders', path: '/orders', orders })
     })
 };
 
 exports.postAdToCart = (req, res, next) => {
-  Quest.findQuest(req.body.id)
+  Quest.findById(req.body.id)
     .then(quest => req.user.addToCart(quest))
     .then(() => res.redirect('/cart'))
 }
@@ -39,7 +42,23 @@ exports.postDeleteFromCart = (req, res, next) => {
 }
 
 exports.postOrder = (req, res, next) => {
-  req.user.addOrder()
+  req.user
+    .populate('cart.items.questId')
+    .then((user) => {
+      const quests = user.cart.items.map((item) => ({ quest: { ...item.questId._doc }, quantity: item.quantity }));
+      const date = new Date();
+      const order = new Order({
+        quests,
+        total: user.cart.total,
+        user: {
+          name: req.user.name,
+          userId: req.user
+        },
+        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      });
+      return order.save();
+    })
     .then(() => res.redirect('/orders'))
+    .then(() => req.user.clearCart())
 }
 

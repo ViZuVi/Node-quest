@@ -308,7 +308,8 @@ a {
   margin-bottom: 8px;
 }
 
-.order-item__quantity {
+.order-item__quantity,
+.order-item__total {
   margin-left: auto;
 }
 

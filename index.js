@@ -1,4 +1,5 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
 
@@ -15,14 +16,12 @@ const errorsController = require('./controllers/errors');
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
-const mongoConnect = require('./util/database').mongoConnect;
-
 const User = require('./models/user');
 
 app.use((req, res, next) => {
-  User.findUser('61dbd3fb3e8f6cc599a64106') // TODO: hardcoded for now; fix after auth implementing 
+  User.findById('61f1a7e8d824c96c5be96ef0') // TODO: hardcoded for now; fix after auth implementing 
     .then(user => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch(err => console.error(err));
@@ -38,4 +37,21 @@ app.use(buyRoutes);
 app.use(userRoutes);
 app.use(errorsController.notFoundPage);
 
-mongoConnect(() => app.listen(3000))
+mongoose.connect(process.env.DATABASE_NODE_QUEST)
+  .then(() => {
+    User.findOne().then(user => {
+      if (!user) {
+        const user = new User({
+          name: 'Jane',
+          email: 'test@test.test',
+          cart: {
+            items: [],
+            total: 0
+          }
+        });
+        user.save();
+      }
+    })
+    app.listen(3000);
+  })
+  .catch(err => console.error(err))
