@@ -59,6 +59,14 @@ a {
   padding: 16px 24px;
 }
 
+.main-header__menu-link.logout {
+  background-color: transparent;
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .main-header__menu-link.isActive,
 .main-header__menu-link:hover {
   color: rgb(221, 255, 142);
@@ -315,4 +323,37 @@ a {
 
 .order-item__date {
   margin-left: 32px;
+}
+
+.login-form {
+  max-width: 590px;
+}
+
+.login-form__input-wrapper {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__label {
+  margin-bottom: 8px;
+}
+
+.login-form__input {
+  min-height: 24px;
+  border: 0;
+}
+
+.login-form__submit-btn {
+  background-color: transparent;
+  border: 2px solid rgb(221, 255, 142);
+  padding: 8px 16px;
+  color: #ffffff;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.login-form__submit-btn:hover {
+  background-color: rgb(221, 255, 142);
+  color: #000000;
 }

@@ -5,7 +5,11 @@ const rootDir = require('../util/path');
 const Quest = require('../models/quest');
 
 exports.getAddQuestPage = (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'admin', 'edit-quest'), { docTitle: 'Add quest', path: '/admin/add-quest' })
+  res.render(path.join(rootDir, 'views', 'admin', 'edit-quest'), {
+    docTitle: 'Add quest',
+    path: '/admin/add-quest',
+    isAuthorized: req.session.isAuthorized,
+  })
 };
 
 exports.postAddQuest = (req, res, next) => {
@@ -34,6 +38,7 @@ exports.getEditQuestPage = (req, res, next) => {
     res.render(path.join(rootDir, 'views', 'admin', 'edit-quest'), {
       docTitle: 'Add quest',
       path: '/admin/edit-quest',
+      isAuthorized: req.session.isAuthorized,
     })
   }
   Quest.findById(req.params.id)

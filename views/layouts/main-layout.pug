@@ -24,18 +24,24 @@ html(lang="en")
                   a.main-header-sub-menu-link(href="/rules", class=(path === "/rules" ? "isActive" : "")) Rules
                 li.main-header-sub-menu-item 
                   a.main-header-sub-menu-link(href="/contacts", class=(path === "/contacts" ? "isActive" : "")) Contacts
-            li.main-header__menu-item
-              a.main-header__menu-link(href="/admin/add-quest", class=(path === "/admin/add-quest" ? "isActive" : "")) Add quest
+            if role === "admin"
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/admin/add-quest", class=(path === "/admin/add-quest" ? "isActive" : "")) Add quest
         nav.main-header__user-nav 
           ul.main-header__menu-list 
-            li.main-header__menu-item
-              a.main-header__menu-link(href="/cart", class=(path === "/cart" ? "isActive" : "")) Cart
-            li.main-header__menu-item
-              a.main-header__menu-link(href="/orders", class=(path === "/orders" ? "isActive" : "")) Orders
-            li.main-header__menu-item
-              a.main-header__menu-link(href="/profile", class=(path === "/profile" ? "isActive" : "")) Profile  
-            li.main-header__menu-item
-              a.main-header__menu-link(href="/login", class=(path === "/login" ? "isActive" : "")) Login
+            if isAuthorized
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/cart", class=(path === "/cart" ? "isActive" : "")) Cart
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/orders", class=(path === "/orders" ? "isActive" : "")) Orders
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/profile", class=(path === "/profile" ? "isActive" : "")) Profile
+              form(action="/logout", method="post") 
+                li.main-header__menu-item
+                  button.main-header__menu-link.logout(type="submit") Logout
+            else 
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/login") Login
       block content
 
       footer.main-footer

@@ -15,18 +15,28 @@ exports.getCartPage = (req, res, next) => {
         path: '/cart',
         quests,
         total,
+        isAuthorized: req.session.isAuthorized,
       });
     })
 };
 
 exports.getShcedulePage = (req, res, next) => {
-  res.render(path.join(rootDir, 'views', 'buy', 'shcedule'), { docTitle: 'Shcedule', path: '/shcedule' })
+  res.render(path.join(rootDir, 'views', 'buy', 'shcedule'), {
+    docTitle: 'Shcedule',
+    path: '/shcedule',
+    isAuthorized: req.session.isAuthorized,
+  })
 };
 
 exports.getOrdersPage = (req, res, next) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
-      res.render(path.join(rootDir, 'views', 'buy', 'orders'), { docTitle: 'Orders', path: '/orders', orders })
+      res.render(path.join(rootDir, 'views', 'buy', 'orders'), {
+        docTitle: 'Orders',
+        path: '/orders',
+        orders,
+        isAuthorized: req.session.isAuthorized,
+      })
     })
 };
 

@@ -13,7 +13,8 @@ exports.getMainPage = (req, res, next) => {
         docTitle: 'Quests',
         quests: quests,
         path: '/',
-        role: 'user'
+        role: 'user', // TODO: move to collection users
+        isAuthorized: req.session.isAuthorized,
       })
     })
     .catch(err => console.error(err))
@@ -26,6 +27,9 @@ exports.getQuestsPage = (req, res, next) => {
 exports.getQuestDetailsPage = (req, res, next) => {
   const questId = req.params.id;
   Quest.findById(questId)
-    .then(quest => res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), { questDetails: quest }))
+    .then(quest => res.render(path.join(rootDir, 'views', 'quests', 'quest-details'), {
+      questDetails: quest,
+      isAuthorized: req.session.isAuthorized,
+    }))
     .catch(err => console.error(err));
 };

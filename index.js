@@ -2,8 +2,14 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express();
+const store = new MongoDBStore({
+  uri: process.env.DATABASE_NODE_QUEST,
+  collection: 'sessions',
+});
 
 const adminRoutes = require('./routes/admin');
 const questRoutes = require('./routes/quests');
@@ -18,8 +24,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const User = require('./models/user');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(session({ secret: 'very long string should be here', resave: false, saveUninitialized: false, store }))
+
+
 app.use((req, res, next) => {
-  User.findById('61f1a7e8d824c96c5be96ef0') // TODO: hardcoded for now; fix after auth implementing 
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user;
       next();
@@ -27,8 +41,6 @@ app.use((req, res, next) => {
     .catch(err => console.error(err));
 })
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use('/admin', adminRoutes);
 app.use(questRoutes);

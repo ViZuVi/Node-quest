@@ -22,12 +22,14 @@ block content
                 span.quest-list__gamers-min #{quest.gamers.min}
                 span  - 
                 span.quest-list__gamers-max #{quest.gamers.max}
-              form(action="/cart", method="post") 
-                input(type="hidden" name="id" value=quest._id)
-                button.quest-list__btn(type="submit") +
+              if isAuthorized
+                form(action="/cart", method="post") 
+                  input(type="hidden" name="id" value=quest._id)
+                  button.quest-list__btn(type="submit") +
           else if role === "admin"
-            div.quest-list__wrapper
-              a(href=`admin/edit-quest/${quest._id}?edit=true`).quest-list__btn Edit
-              form(action="/admin/delete" method="POST") 
-                input(type="hidden" name="id" value=quest._id)
-                button(type="submit").quest-list__btn Delete
+            if isAuthorized
+              div.quest-list__wrapper
+                a(href=`admin/edit-quest/${quest._id}?edit=true`).quest-list__btn Edit
+                form(action="/admin/delete" method="POST") 
+                  input(type="hidden" name="id" value=quest._id)
+                  button(type="submit").quest-list__btn Delete
