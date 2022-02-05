@@ -1,10 +1,11 @@
 const path = require('path');
+const bcrypt = require('bcryptjs');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_EMAIL_KEY);
 
 const rootDir = require('../util/path');
-
 const User = require('../models/user');
 
-const bcrypt = require('bcryptjs');
 
 exports.getLoginPage = (req, res, next) => {
   res.render(path.join(rootDir, 'views', 'user', 'login'), {
@@ -68,6 +69,7 @@ exports.postSignup = (req, res, next) => {
         .then(hashedPass => {
           const user = new User({
             username,
+            // create email field when for user
             password: hashedPass,
             cart: {
               items: [],
@@ -76,7 +78,17 @@ exports.postSignup = (req, res, next) => {
           });
           return user.save();
         })
-        .then(() => res.redirect('/login'))
+        .then(() => {
+          res.redirect('/login');
+          const msg = {
+            to: 'zukhrael@yandex.com', // TODO: add user email
+            from: 'zukhrab29@gmail.com', // Use the email address or domain you verified above
+            subject: 'Welcome to Node-quest',
+            text: 'You succesfully signed in!',
+            html: '<strong>You succesfully signed in!</strong>',
+          };
+          return sgMail.send(msg);
+        })
     })
     .catch(err => console.error(err))
 }
