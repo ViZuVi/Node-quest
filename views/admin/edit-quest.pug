@@ -35,6 +35,7 @@ block content
         label.add-quest-form__label Price 
         input.add-quest-form__input(type="text" name="quest-price", value=isEdit ? quest.price  : "")
       input(type="hidden", name="id" value=isEdit ? quest._id : "")
+      input(type="hidden", name="_csrf" value=csrfToken)
       if isEdit
         button.add-quest-form__submit-btn(type="submit") Edit
       else 

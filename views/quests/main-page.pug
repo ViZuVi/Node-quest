@@ -25,6 +25,7 @@ block content
               if isAuthorized
                 form(action="/cart", method="post") 
                   input(type="hidden" name="id" value=quest._id)
+                  input(type="hidden", name="_csrf" value=csrfToken)
                   button.quest-list__btn(type="submit") +
           else if role === "admin"
             if isAuthorized
@@ -32,4 +33,5 @@ block content
                 a(href=`admin/edit-quest/${quest._id}?edit=true`).quest-list__btn Edit
                 form(action="/admin/delete" method="POST") 
                   input(type="hidden" name="id" value=quest._id)
+                  input(type="hidden", name="_csrf" value=csrfToken)
                   button(type="submit").quest-list__btn Delete

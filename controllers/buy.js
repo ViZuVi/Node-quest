@@ -15,7 +15,6 @@ exports.getCartPage = (req, res, next) => {
         path: '/cart',
         quests,
         total,
-        isAuthorized: req.session.isAuthorized,
       });
     })
 };
@@ -24,7 +23,6 @@ exports.getShcedulePage = (req, res, next) => {
   res.render(path.join(rootDir, 'views', 'buy', 'shcedule'), {
     docTitle: 'Shcedule',
     path: '/shcedule',
-    isAuthorized: req.session.isAuthorized,
   })
 };
 
@@ -35,7 +33,6 @@ exports.getOrdersPage = (req, res, next) => {
         docTitle: 'Orders',
         path: '/orders',
         orders,
-        isAuthorized: req.session.isAuthorized,
       })
     })
 };
@@ -61,7 +58,7 @@ exports.postOrder = (req, res, next) => {
         quests,
         total: user.cart.total,
         user: {
-          name: req.user.name,
+          username: req.user.username,
           userId: req.user
         },
         date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,

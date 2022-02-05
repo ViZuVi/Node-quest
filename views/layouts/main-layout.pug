@@ -38,10 +38,13 @@ html(lang="en")
                 a.main-header__menu-link(href="/profile", class=(path === "/profile" ? "isActive" : "")) Profile
               form(action="/logout", method="post") 
                 li.main-header__menu-item
+                  input(type="hidden", name="_csrf" value=csrfToken)
                   button.main-header__menu-link.logout(type="submit") Logout
             else 
               li.main-header__menu-item
-                a.main-header__menu-link(href="/login") Login
+                a.main-header__menu-link(href="/login", class=(path === "/login" ? "isActive" : "")) Login
+              li.main-header__menu-item
+                a.main-header__menu-link(href="/signup", class=(path === "/signup" ? "isActive" : "")) Signup
       block content
 
       footer.main-footer

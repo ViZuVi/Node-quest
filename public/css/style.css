@@ -327,6 +327,8 @@ a {
 
 .login-form {
   max-width: 590px;
+  margin-bottom: 40px;
+  position: relative;
 }
 
 .login-form__input-wrapper {
@@ -356,4 +358,11 @@ a {
 .login-form__submit-btn:hover {
   background-color: rgb(221, 255, 142);
   color: #000000;
+}
+
+.error-message {
+  position: absolute;
+  bottom: -40px;
+  color: red;
+  font-weight: 700;
 }

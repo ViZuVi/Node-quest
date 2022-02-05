@@ -12,10 +12,12 @@ block content
             span.cart-list__quantity #{quest.quantity}
             form(action="/cart-delete-item", method="post")
               input(type="hidden" name="id" value=quest.questId._id)
+              input(type="hidden", name="_csrf" value=csrfToken)
               button.quest-list__btn(type="submit") Delete 
       form.cart-total(action="/checkout" method="POST")
         span Total:&nbsp;
         span #{total} ₽
+        input(type="hidden", name="_csrf" value=csrfToken)
         button.cart__checkout-btn(type="submit") Checkout
     else
       p Nothing in cart yet... 
