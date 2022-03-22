@@ -11,6 +11,8 @@ block content
         label.login-form__label password
         input.login-form__input(type="password" name="password")
         input(type="hidden", name="_csrf" value=csrfToken)
-      button.login-form__submit-btn(type="submit") Submit
+      div.login-form__buttons-wrapper
+        button.login-form__submit-btn(type="submit") Submit
+        a.login-form__restore-btn(href="/restore") Restore password
       if error.length
         div.error-message #{error}

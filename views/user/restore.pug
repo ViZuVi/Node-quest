@@ -1,0 +1,13 @@
+extends ../layouts/main-layout.pug
+
+block content
+  main.page-main
+    h1.page-content__title Restore your password
+    form.login-form(action="/restore", method="post")
+      div.login-form__input-wrapper
+        label.login-form__label username
+        input.login-form__input(type="text" name="login")
+        input(type="hidden", name="_csrf" value=csrfToken)
+      button.login-form__submit-btn(type="submit") Submit
+      if error.length
+        div.error-message #{error}
